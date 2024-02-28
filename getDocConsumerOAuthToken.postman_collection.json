@@ -1,8 +1,8 @@
 {
 	"info": {
-		"_postman_id": "fb604701-056a-4098-b400-62f23cec1595",
-		"name": "get Document Consumer OAuth token",
-		"description": "Here I try to get a Document Consumer OAuth token using Postman",
+		"_postman_id": "1bd44a1e-3751-4371-a12a-6ebc5f02b205",
+		"name": "get Smals Document Consumer OAuth token example",
+		"description": "Postman example to get OAuth token from Smals OAuth authentication server.\r\n\r\n- Run once the request \"INIT: Load Crypto Library for RS256\" in order to load a needed library.\r\n- Put the private key of your certificate as a Postman Environment variable. The value must be PEM formatted, starting with -----BEGIN PRIVATE KEY----- and ending with -----END PRIVATE KEY----- . The variable name must be CLIENT_PRIVATE_KEY .\r\n- Open the pre-request script tab of the get token request and put you client-ID in the data line 14 and 15.\r\n\r\nAfter a successful get token request, you should see the token and the granted scopes displayed. The token is also stored in the variable myClientTokenFromSmals.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -12,7 +12,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "89aaa0d0-3316-4c62-bd2c-d2369345cfea",
+						"id": "2916b294-f360-4805-928a-930db449ef4f",
 						"exec": [
 							"pm.globals.set('jsrsasign_js',responseBody);"
 						],
@@ -41,12 +41,12 @@
 			"response": []
 		},
 		{
-			"name": "get DocumentConsumer OAuth token V5",
+			"name": "get Document Consumer OAuth token V5",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "a335d470-cdb4-4698-8229-b2f9d37aba3e",
+						"id": "254e1482-ad62-4632-830a-514337493aaf",
 						"exec": [
 							"// Tips from: https://github.com/kjur/jsrsasign/issues/199\r",
 							"// https://github.com/kjur/jsrsasign/wiki/Tutorial-for-JWT-generation\r",
@@ -61,8 +61,8 @@
 							"\r",
 							"var data = {\r",
 							"    \"exp\": Math.round(87000 + Date.now()/1000),\r",
-							"    \"iss\": 'OAuth:client:ID',\r",
-							"    \"sub\": 'OAuth:client:ID',\r",
+							"    \"iss\": 'put your client ID here',\r",
+							"    \"sub\": 'put your client ID here',\r",
 							"    \"aud\": 'https://services.socialsecurity.be/REST/oauth/v5/token',\r",
 							"    \"jti\": uuid()\r",
 							"};\r",
@@ -88,7 +88,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "6c8d1936-73b3-4c1b-87d7-43a1f0d14ba6",
+						"id": "c9d2f3be-6a33-4d9c-a537-555bafb8046e",
 						"exec": [
 							"var data = JSON.parse(responseBody);\r",
 							"console.log(\"responseBody\", responseBody);\r",
@@ -151,6 +151,28 @@
 				"description": "In order to fill in the JWT_TOKEN variable we need to do a pre request script. We use the private key to sign the token in the pre request script. We don't need a keystore. You will need to put the private key in a global or environment variable together with the audience url (or you can hard-code this)."
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "028e29fa-cd95-4286-80bc-807471d8003f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0c42952d-441d-4098-aacc-09f8381ef5dd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"protocolProfileBehavior": {}
